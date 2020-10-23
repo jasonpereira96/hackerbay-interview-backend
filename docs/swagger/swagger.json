@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "description": "3 endpoints are provided. /login, /patch, /thumbnail. ",
+        "description": "REST API for Hackerbay Interview. 3 endpoints are provided. /login, /patch, /thumbnail. /patch and /thumbnail are protected.",
         "version": "1.0.0",
         "title": "Hackerbay Interview Backend"
     },
