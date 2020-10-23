@@ -5,7 +5,7 @@ const login = require('./../controllers/login').login;
 const thumbnail = require('./../controllers/thumbnail').thumbnail;
 const { thumbnail: thumbnailValidator,
     patch: patchValidator,
-    login: loginValidator
+    login: loginValidator,
 } = require('./../middleware/validation');
 const { authorize } = require('./../middleware/authorization');
 

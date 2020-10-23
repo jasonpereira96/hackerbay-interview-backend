@@ -17,5 +17,5 @@ const authorize = (request, response, next) => {
 };
 
 module.exports = {
-    authorize
+    authorize,
 };

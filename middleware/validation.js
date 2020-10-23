@@ -11,7 +11,7 @@ const login = (request, response, next) => {
             .required(),
     });
 
-    let validation = schema.validate(request.body);
+    const validation = schema.validate(request.body);
     if (validation.error) {
         sendError(response, validation.error);
     } else {
@@ -23,9 +23,9 @@ const patch = (request, response, next) => {
     console.log(typeof request.body.json);
     const schema = Joi.object({
         json: Joi.object().required(),
-        patch: Joi.array().required()
+        patch: Joi.array().required(),
     });
-    let validation = schema.validate(request.body);
+    const validation = schema.validate(request.body);
     if (validation.error) {
         sendError(response, validation.error);
     } else {
@@ -35,9 +35,9 @@ const patch = (request, response, next) => {
 
 const thumbnail = (request, response, next) => {
     const schema = Joi.object({
-        url: Joi.string().required().uri()
+        url: Joi.string().required().uri(),
     });
-    let validation = schema.validate(request.body);
+    const validation = schema.validate(request.body);
     if (validation.error) {
         sendError(response, validation.error);
     } else {
@@ -48,11 +48,11 @@ const thumbnail = (request, response, next) => {
 module.exports = {
     login,
     patch,
-    thumbnail
+    thumbnail,
 };
 
-function sendError(response, error) {
+function sendError (response, error) {
     response.json({
-        error: error.details[0].message
+        error: error.details[0].message,
     });
 }

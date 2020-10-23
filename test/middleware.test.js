@@ -1,7 +1,7 @@
-//During the test the env variable is set to test
+// During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 
-//Require the dev-dependencies
+// Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app');
@@ -11,11 +11,11 @@ const { generateToken } = require('./utils');
 chai.use(chaiHttp);
 
 const protectedEndpoints = ['/patch', '/thumbnail'];
-const UNAUTHORIZED = 401, OK = 200;
+const UNAUTHORIZED = 401; const OK = 200;
 
 describe('Authorization', () => {
-    protectedEndpoints.forEach(endpoint => {
-        it('it should return unauthorized', done => {
+    protectedEndpoints.forEach((endpoint) => {
+        it('it should return unauthorized', (done) => {
             chai.request(app)
                 .post(endpoint)
                 .end((error, response) => {
@@ -24,7 +24,7 @@ describe('Authorization', () => {
                 });
         });
 
-        it('it should return unauthorized', done => {
+        it('it should return unauthorized', (done) => {
             chai.request(app)
                 .post(endpoint)
                 .set('Bearer', '')
@@ -34,7 +34,7 @@ describe('Authorization', () => {
                 });
         });
 
-        it('it should return unauthorized', done => {
+        it('it should return unauthorized', (done) => {
             chai.request(app)
                 .post(endpoint)
                 .set('Bearer', 'Some random string')
@@ -48,63 +48,67 @@ describe('Authorization', () => {
 
 
 describe('Validation', () => {
-    it('it should require username', done => {
+    it('it should require username', (done) => {
         chai.request(app)
             .post('/login')
             .end((error, response) => {
                 response.should.have.status(OK);
                 response.body.should.be.a('object');
-                response.body.should.have.property('error').eql('"username" is required');
+                response.body.should.have.property('error')
+                    .eql('"username" is required');
                 done();
             });
     });
-    it('Username should not be empty', done => {
+    it('Username should not be empty', (done) => {
         chai.request(app)
             .post('/login')
             .send({
-                username: ''
+                username: '',
             })
             .end((error, response) => {
                 response.should.have.status(OK);
                 response.body.should.be.a('object');
-                response.body.should.have.property('error').eql('"username" is not allowed to be empty');
+                response.body.should.have.property('error')
+                    .eql('"username" is not allowed to be empty');
                 done();
             });
     });
 
-    it('Password should not be empty', done => {
+    it('Password should not be empty', (done) => {
         chai.request(app)
             .post('/login')
             .send({
                 username: 'jason',
-                password: ''
+                password: '',
             })
             .end((error, response) => {
                 response.should.have.status(OK);
                 response.body.should.be.a('object');
-                response.body.should.have.property('error').eql('"password" is not allowed to be empty');
+                response.body.should.have.property('error')
+                    .eql('"password" is not allowed to be empty');
                 done();
             });
     });
 
-    it('it should require password', done => {
+    it('it should require password', (done) => {
         chai.request(app)
             .post('/login')
             .send({
-                username: 'jason'
+                username: 'jason',
             })
             .end((error, response) => {
                 response.should.have.status(OK);
                 response.body.should.be.a('object');
-                response.body.should.have.property('error').eql('"password" is required');
+                response.body.should.have.property('error')
+                    .eql('"password" is required');
                 done();
             });
     });
 
-    it('it should return password pattern does not match', done => {
-        let credentials = {
+    it('it should return password pattern does not match', (done) => {
+        const credentials = {
             username: 'jason',
-            password: 'test@#$%'
+            password: 'test@#$%',
         };
         chai.request(app)
             .post('/login')
@@ -118,10 +122,10 @@ describe('Validation', () => {
             });
     });
 
-    it('it should return the correct JWT', done => {
-        let credentials = {
+    it('it should return the correct JWT', (done) => {
+        const credentials = {
             username: 'jason',
-            password: 'TTTtest123'
+            password: 'TTTtest123',
         };
         chai.request(app)
             .post('/login')
@@ -129,7 +133,8 @@ describe('Validation', () => {
             .end((error, response) => {
                 response.should.have.status(OK);
                 response.body.should.be.a('object');
-                response.body.should.have.property('token').eql(generateToken(credentials));
+                response.body.should.have.property('token')
+                    .eql(generateToken(credentials));
                 response.body.should.have.property('loggedIn').eql(true);
                 done();
             });
