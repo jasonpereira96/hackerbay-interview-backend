@@ -20,7 +20,6 @@ const login = (request, response, next) => {
 };
 
 const patch = (request, response, next) => {
-    console.log(typeof request.body.json);
     const schema = Joi.object({
         json: Joi.object().required(),
         patch: Joi.array().required(),

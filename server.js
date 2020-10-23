@@ -1,5 +1,4 @@
 const app = require('./app');
-
 const { PORT } = require('./constants/constants');
 
 app.listen(PORT, () => {
