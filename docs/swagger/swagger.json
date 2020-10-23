@@ -1,0 +1,197 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "",
+        "version": "1.0.0",
+        "title": "Hackerbay Interview Backend"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "description": "Logs in a user by returning a JWT which can be used to authenticate all future requests",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/LoginResponse"
+                                },
+                                "examples": {
+                                    "success": {
+                                        "summary": "Login successfully",
+                                        "value": {
+                                            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImp0aSI6IjM5NmY3MDU0LTg3ODMtNDJiOS1hMzQ0LTQxMGViMzU3NTJlZCIsImlhdCI6MTYwMzQzNDQ1MiwiZXhwIjoxNjAzNDM4MDUyfQ.5NHbSP8dIlFc76pzJwEUyz4baJKf9UWlqtzjZZ4y6XA",
+                                            "loggedIn": true
+                                        }
+                                    },
+                                    "username missing": {
+                                        "summary": "Username missing",
+                                        "value": {
+                                            "error": "\"username\" is required"
+                                        }
+                                    },
+                                    "username empty": {
+                                        "summary": "Username empty",
+                                        "value": {
+                                            "error": "\"username\" is not allowed to be empty"
+                                        }
+                                    },
+                                    "password missing": {
+                                        "summary": "Password missing",
+                                        "value": {
+                                            "error": "\"password\" is required"
+                                        }
+                                    },
+                                    "password empty": {
+                                        "summary": "Password empty",
+                                        "value": {
+                                            "error": "\"password\" is not allowed to be empty"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/patch": {
+            "post": {
+                "description": "Patches a JSON object",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "json",
+                                    "patch"
+                                ],
+                                "properties": {
+                                    "json": {
+                                        "type": "string"
+                                    },
+                                    "patch": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Patch successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "success": {
+                                        "summary": "Patched the JSON",
+                                        "value": {
+                                            "baz": "boo",
+                                            "hello": [
+                                                "world"
+                                            ]
+                                        }
+                                    },
+                                    "json missing": {
+                                        "summary": "JSON missing",
+                                        "value": {
+                                            "error": "\"json\" is required"
+                                        }
+                                    },
+                                    "patch missing": {
+                                        "summary": "Patch missing",
+                                        "value": {
+                                            "error": "\"patch\" is required"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/thumbnail": {
+            "post": {
+                "description": "Returns an image which has been resized to 50px x 50px",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "url"
+                                ],
+                                "properties": {
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Return the resized image",
+                        "content": {
+                            "image/jpg": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginResponse": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

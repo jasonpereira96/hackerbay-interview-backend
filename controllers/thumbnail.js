@@ -1,5 +1,15 @@
+/**
+ * Controllers module.
+ * @module controllers
+ */
 const axios = require('axios');
 const sharp = require('sharp');
+/**
+ * Downloads a file from the given url and resizes it.
+ * @param {Request} request 
+ * @param {Response} response 
+ * @param {function} next 
+ */
 
 const thumbnail = async (request, response, next) => {
     let { url } = request.body;
