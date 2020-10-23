@@ -181,6 +181,24 @@
                                     "type": "string",
                                     "format": "binary"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "password": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "unable to resize": {
+                                        "summary": "unable to resize",
+                                        "value": {
+                                            "error": "Something went wrong. Could not resize image"
+                                        }
+                                    }
+                                }
                             }
                         }
                     },

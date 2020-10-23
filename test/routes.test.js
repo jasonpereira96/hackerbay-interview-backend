@@ -4,14 +4,12 @@ process.env.NODE_ENV = 'test';
 //Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { token } = require('morgan');
 const app = require('../app');
 const should = chai.should();
 const { generateToken } = require('./utils');
 
 chai.use(chaiHttp);
 
-const protectedEndpoints = ['/patch', '/thumbnail'];
 const UNAUTHORIZED = 401, OK = 200;
 
 describe('/login route', () => {
@@ -216,7 +214,7 @@ describe('/thumbnail route', () => {
             password: 'test'
         };
         let data = {
-            url: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png'
+            url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
         };
         let token = generateToken(credentials);
 
@@ -240,7 +238,7 @@ describe('/thumbnail route', () => {
             password: 'test'
         };
         let data = {
-            url: 'https://homepages.cae.wisc.edu/~ece533/images/airplane123.png'
+            url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp_wrong_url.png'
         };
         let token = generateToken(credentials);
 

@@ -1,22 +1,16 @@
-/**
- * Controllers module.
- * @module controllers
- */
 const axios = require('axios');
 const sharp = require('sharp');
-/**
- * Downloads a file from the given url and resizes it.
- * @param {Request} request 
- * @param {Response} response 
- * @param {function} next 
- */
 
 const thumbnail = async (request, response, next) => {
     let { url } = request.body;
-    //validate non empty either here or in middleware
 
     try {
-        const imageResponse = await axios({ url, responseType: 'arraybuffer' });
+        const imageResponse = await axios({
+            url,
+            method: 'get',
+            responseType: 'arraybuffer',
+            timeout: 4000
+        });
         const buffer = Buffer.from(imageResponse.data, 'binary');
 
         let resizedBuffer = await sharp(buffer)
@@ -32,7 +26,6 @@ const thumbnail = async (request, response, next) => {
             'Content-Length': resizedBuffer.length
         });
         response.end(resizedBuffer);
-
     } catch (e) {
         response.json({
             error: 'Something went wrong. Could not resize image'
