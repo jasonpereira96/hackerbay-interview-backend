@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "description": "",
+        "description": "3 endpoints are provided. /login, /patch, /thumbnail. ",
         "version": "1.0.0",
         "title": "Hackerbay Interview Backend"
     },
@@ -141,7 +141,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
                     }
+                },
+                "security": {
+                    "bearerAuth": []
                 }
             }
         },
@@ -177,7 +183,13 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
                     }
+                },
+                "security": {
+                    "bearerAuth": []
                 }
             }
         }
@@ -191,6 +203,18 @@
                         "type": "string"
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "responses": {
+            "UnauthorizedError": {
+                "description": "Unauthorized"
             }
         }
     }
