@@ -85,7 +85,7 @@
         },
         "/patch": {
             "post": {
-                "description": "Patches a JSON object. Requires an Authorization: Bearer <token> header.",
+                "description": "Patches a JSON object. Requires an Authorization: Bearer 'token' header.",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -153,7 +153,7 @@
         },
         "/thumbnail": {
             "post": {
-                "description": "Returns an image which has been resized to 50px x 50px. Requires an Authorization: Bearer <token> header.",
+                "description": "Returns an image which has been resized to 50px x 50px. Requires an Authorization: Bearer 'token' header.",
                 "requestBody": {
                     "required": true,
                     "content": {
